@@ -1,4 +1,12 @@
 import csv
+import requests
+
+response = requests.get('https://api.github.com/repos/Another50/OSINTsurname/releases/latest')
+latest_release = response.json()
+
+if latest_release['tag_name'] != '1.0':
+    print(f'Une nouvelle version ({latest_release["tag_name"]}) est disponible !')
+    print(f'Téléchargez-la ici : {latest_release["html_url"]}')
 
 with open('surname.csv') as csvfile:
     reader = csv.DictReader(csvfile)
