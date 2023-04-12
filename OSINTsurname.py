@@ -1,4 +1,14 @@
 import csv
+import requests
+
+
+response = requests.get('https://api.github.com/repos/<votre-nom-utilisateur>/<votre-repo>/releases/latest')
+latest_release = response.json()
+
+# Vérifier si la dernière release est différente de la version actuelle
+if latest_release['tag_name'] != '<votre-version-actuelle>':
+    print(f'Une nouvelle version ({latest_release["tag_name"]}) est disponible !')
+    print(f'Téléchargez-la ici : {latest_release["html_url"]}')
 
 with open('surname.csv') as csvfile:
     reader = csv.DictReader(csvfile)
